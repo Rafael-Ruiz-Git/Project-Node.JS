@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Rafael-Ruiz-Git/Project-Node.JS/issues"
   },
-  "homepage": "https://github.com/Rafael-Ruiz-Git/Project-Node.JS#readme"
+  "homepage": "https://github.com/Rafael-Ruiz-Git/Project-Node.JS#readme",
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  }
 }
