@@ -1,0 +1,18 @@
+GET http://localhost:3001/
+GET http://localhost:3001/users/admin/active
+GET http://localhost:3001/some.text
+GET http://localhost:3001/posts
+GET http://localhost:3001/post
+GET http://localhost:3001/tag
+GET http://localhost:3001/tagsfefgrg
+GET http://localhost:3001/error/404
+GET http://localhost:3001/error/403
+GET http://localhost:3001/dragonfly
+GET http://localhost:3001/fly
+GET http://localhost:3001/flybird
+GET http://localhost:3001/users/admin/?order=asc&limit=1
+POST http://localhost:3001/
+PUT http://localhost:3001/
+PATCH http://localhost:3001/
+DELETE http://localhost:3001/
+# GET http://localhost:3001/nodejs/?order=asc
