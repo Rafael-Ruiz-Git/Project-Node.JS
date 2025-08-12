@@ -1,17 +1,23 @@
 const { ta } = require("date-fns/locale");
 const express = require("express");
+const tasksController = require("./tasks.controller.js");
 
-const tasksRouter= express.Router();
+/*Fire the router function*/
+const tasksRouter = express.Router();
 
+// Get All Tasks
+tasksRouter.get("/tasks", tasksController.handleGetTasks);
 
-tasksRouter.get("/tasks", (req,res)=> {
-    return res.send("Hello!!");
-});
+// POST Create a task
+tasksRouter.post("/tasks", tasksController.handlePostTasks);
 
-tasksRouter.post("/tasks", (req,res)=> {
-  console.log(req.body);
-  console.log(typeof req.body);
-  return res.send("Create new Taks");
-});
+// Get All Tasks
+tasksRouter.patch("/tasks", tasksController.handlePatchTasks);
 
+// POST Create a task
+tasksRouter.delete("/tasks", tasksController.handleDeleteTasks);
+
+// export the task router
 module.exports = tasksRouter;
+
+
