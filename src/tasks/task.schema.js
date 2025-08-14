@@ -5,7 +5,7 @@ const taskSchema = new Schema({
     type: String,
     required: [true, "Task title is required"],
     trim: true,
-    maxLength: [100, "Ttle cannot be more than 100 characters"],
+    maxLength: [100, "Title cannot be more than 100 characters"],
       },
   description: {
     type: String,
