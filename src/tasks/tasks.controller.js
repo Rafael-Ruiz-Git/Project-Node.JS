@@ -1,49 +1,28 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const Task = require("./task.schema.js");
+const createTaskProvider = require("./providers/createTask.provider.js");
+const getTaskProvider = require("./providers/getTasks.providers.js");
+const updateTaskProvider = require("./providers/updateTask.provider.js");
+const deleteTaskProvider = require("./providers/deleteTask.provider.js");
 
-function handleGetTasks(req, res) {
-  let response = [
-    {
-      title: "Title Of the Task",
-      date: "2025-01-01T12:00:00Z",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis diam vel malesuada ultricies.",
-      priority: "normal",
-      status: "todo",
-    },
-    {
-      title: "Title Of the Task 2",
-      date: "2025-01-01T12:00:00Z",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis diam vel malesuada ultricies.",
-      priority: "normal",
-      status: "inProgress",
-    },
-  ];
-
- 
-  res.status(StatusCodes.OK).json(response);
+async function handleGetTasks(req, res) {
+  const tasks =  await getTaskProvider(req, res);
+  res.status(StatusCodes.OK).json(tasks);
 }
 
 async function handlePostTasks(req, res) {
-  const task = new Task({
-    title: req.body.title,
-    description: req.body.description,
-    status: req.body.status,
-    priority: req.body.priority,
-    dueDate: req.body.dueDate,
-  });
- await task.save();
+  const task = await createTaskProvider(req, res);
 
  res.status(StatusCodes.CREATED).json(task);
 }
 
-function handlePatchTasks(req, res) {
-  res.send("PATCH tasks controller");
+async function handlePatchTasks(req, res) {
+  const updateTask = await updateTaskProvider(req, res);
+   res.status(StatusCodes.OK).json(updateTask);
 }
 
-function handleDeleteTasks(req, res) {
-  res.send("DELETE tasks controller");
+async function handleDeleteTasks(req, res) {
+  const deleteTask = await deleteTaskProvider(req, res);
+ res.status(StatusCodes.OK).json(deleteTask);
 }
 
 module.exports = {
