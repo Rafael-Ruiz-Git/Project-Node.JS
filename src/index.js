@@ -8,6 +8,7 @@ const tasksRouter = require("./tasks/tasks.router.js");
 const authRouter = require("./auth/auth.router.js");
 const { StatusCodes } = require("http-status-codes");
 const usersRouter = require("./users/users.router.js");
+const mongoose = require("mongoose");
 
 const app = express();
 const port = 3001;
@@ -44,6 +45,18 @@ app.use((req, res) => {
   res.status(StatusCodes.NOT_FOUND).json(null);
 });
 
-app.listen(port, () => {
+async function bootstrap(){
+  try {
+    await mongoose.connect("mongodb+srv://ruiz2099alex:BMjZAT4Wl1vAnyer@nodejs.mrswa8v.mongodb.net/", {dbName: "fullstackTasks"});
+    console.log("Connected to MongoDB");
+    app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
+  }
+  catch (error){
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+bootstrap();
