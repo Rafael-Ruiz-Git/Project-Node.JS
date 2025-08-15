@@ -13,4 +13,4 @@ const updateTasksValidator = [
   body("status").isIn( ["todo", "inProgress", "completed"]).optional()
  ];
 
-module.exports = getTasksValidator;
+module.exports = updateTasksValidator;
