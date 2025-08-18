@@ -30,13 +30,7 @@ email: {
 password: {
   type: String,
   required: [true,"Password is required"],
-  minLenght: [8, "Password must be 8 char"],
-  validate: {
-    validator: function (password){
-      return /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
-      },
-      message: () => "Password must include at least one number, one uppercase letter, one lowercase letter, and one special character.",
-  },
+
 }
 });
 
