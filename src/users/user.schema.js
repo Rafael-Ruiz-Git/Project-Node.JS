@@ -36,3 +36,36 @@ password: {
 
 const User = model("User", userSchema); 
 module.exports = User;
+
+/**
+ * @swagger 
+ * 
+ * components: 
+ *  schemas:
+ *    User:
+ *      type: object
+ *      required: 
+ *        - firstName
+ *        - email
+ *        - password
+ *      properties: 
+ *        firstName:
+ *          type: string
+ *          description: first name of user
+ *          maxLength: 100
+ *        lastName:
+ *          type: string
+ *          description: last name of user
+ *          maxLength: 100
+ *        email:
+ *          type: string
+ *          description: valid email address
+ *        password:
+ *          type: string
+ *          description: Must contain at least 8 characters and also a number, capital letter and a special character
+ *      example:
+ *        firstName: Alex
+ *        lastName: Ruiz
+ *        email: alex@ruiz.com
+ *        password: Password123#
+* */

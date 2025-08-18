@@ -11,6 +11,80 @@ const authenticateToken = require("../middleware/authenticateToken.middleware.js
 /*Fire the router function*/
 const tasksRouter = express.Router();
 
+
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * /tasks:
+ *  get:
+ *    summary: Get all tasks
+ *    tags: [Tasks]
+ *    security: 
+ *      - bearerAuth: []
+ *    parameters:
+ *      - in: query
+ *        name: limit
+ *        schema:
+ *           type: integer
+ *           default: 10
+ *        description: The number of task needed
+ *      - in: query
+ *        name: page
+ *        schema:
+ *           type: integer
+ *           default: 1
+ *        description: The number of page task response
+ *      - in: query
+ *        name: order
+ *        schema:
+ *           type: string
+ *           default: 'asc'
+ *           enum: ['asc', 'dsc']
+ *        description: order of task
+ *      
+ *    responses:
+ *      200:
+ *        description: Task created successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: Ok
+ *              data: 
+ *                - _id: 68a34b78c808a55af4220da0
+ *                  title: Create a new video
+ *                  description: A video about fullstack web development
+ *                  status: todo
+ *                  priority: normal
+ *                  dueDate: 2025-01-01T12:00:00Z
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error: 
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error: 
+ *                message: Please try login in again, invalid token.
+ */
 // Get All Tasks
 tasksRouter.get("/tasks", [getTasksValidator, authenticateToken], (req, res) => {
   const result = validationResult(req);
@@ -21,6 +95,64 @@ tasksRouter.get("/tasks", [getTasksValidator, authenticateToken], (req, res) => 
   }
 });
 
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * /tasks:
+ *  post:
+ *    summary: Create a new task
+ *    tags: [Tasks]
+ *    security: 
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Task'
+ *    responses:
+ *      201:
+ *        description: Task created successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 201
+ *              message: Created
+ *              data: 
+ *                _id: 68a34b78c808a55af4220da0
+ *                title: Create a new video
+ *                description: A video about fullstack web development
+ *                status: todo
+ *                priority: normal
+ *                dueDate: 2025-01-01T12:00:00Z
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error: 
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error: 
+ *                message: Please try login in again, invalid token.
+ */
 
 tasksRouter.post("/tasks", [createTaskValidator,authenticateToken], (req, res) => {
   const result = validationResult(req);
@@ -32,6 +164,66 @@ tasksRouter.post("/tasks", [createTaskValidator,authenticateToken], (req, res) =
 });
 
 
+
+
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * /tasks:
+ *  patch:
+ *    summary: Updates a task
+ *    tags: [Tasks]
+ *    security: 
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/TaskUpdate'
+ *    responses:
+ *      200:
+ *        description: Task updated successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: Ok
+ *              data: 
+ *                _id: 68a34b78c808a55af4220da0
+ *                title: Create a new video
+ *                description: A video about fullstack web development
+ *                status: todo
+ *                priority: normal
+ *                dueDate: 2025-01-01T12:00:00Z
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error: 
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error: 
+ *                message: Please try login in again, invalid token.
+ */
 tasksRouter.patch("/tasks", [updateTasksValidator, authenticateToken],(req, res) => {
   const result = validationResult(req);
   if (result.isEmpty()) {
@@ -42,6 +234,61 @@ tasksRouter.patch("/tasks", [updateTasksValidator, authenticateToken],(req, res)
 });
 
 
+
+/**
+ * @swagger
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * /tasks:
+ *  delete:
+ *    summary: Delete a task
+ *    tags: [Tasks]
+ *    security: 
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/TaskDelete'
+ *    responses:
+ *      200:
+ *        description: Task deleted successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: Ok
+ *              data: 
+ *                acknowledged: true
+ *                deletedCount: 1
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error: 
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error: 
+ *                message: Please try login in again, invalid token.
+ */
 tasksRouter.delete("/tasks", [deleteTasksValidator, authenticateToken],(req, res) => {
   const result = validationResult(req);
   if (result.isEmpty()) {

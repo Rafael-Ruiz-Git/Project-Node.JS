@@ -40,3 +40,107 @@ const taskSchema = new Schema(
 
 const Task = model("Task", taskSchema);
 module.exports = Task;
+
+/**
+ * @swagger 
+ * 
+ * components: 
+ *  schemas:
+ *    Task:
+ *      type: object
+ *      required: 
+ *        - title
+ *        - description
+ *        - status
+ *        - priority
+ *        - dueDate
+ *      properties: 
+ *        title:
+ *          type: string
+ *          description: title of the task
+ *          maxLength: 100
+ *        description:
+ *          type: string
+ *          description: description of task
+ *          maxLength: 500
+ *        status:
+ *         type: string
+ *         decription: status of the task
+ *         enum: ["todo", "inProgress", "completed"]
+ *        priority:
+ *         type: string
+ *         description: priority of the task
+ *         enum: ["low", "normal", "high"]
+ *        dueDate:
+ *         type: string
+ *         format: ISO8601 Date String
+ *         description: due Date of the task
+ *      example:
+ *        title: Create a new video
+ *        description: A video about fullstack web development
+ *        status: todo
+ *        priority: normal
+ *        dueDate: 2025-01-01T12:00:00Z
+* */
+
+/**
+ * @swagger 
+ * 
+ * components: 
+ *  schemas:
+ *    TaskUpdate:
+ *      type: object
+ *      required: 
+ *        - _id
+ *      properties: 
+ *        _id:
+ *          type: string
+ *          description: MongoDB ObjectId of task
+ *          format: ObjectId
+ *        title:
+ *          type: string
+ *          description: title of the task
+ *          maxLength: 100
+ *        description:
+ *          type: string
+ *          description: description of task
+ *          maxLength: 500
+ *        status:
+ *         type: string
+ *         decription: status of the task
+ *         enum: ["todo", "inProgress", "completed"]
+ *        priority:
+ *         type: string
+ *         description: priority of the task
+ *         enum: ["low", "normal", "high"]
+ *        dueDate:
+ *         type: string
+ *         format: ISO8601 Date String
+ *         description: due Date of the task
+ *      example:
+ *        _id: 68a34b78c808a55af4220da0
+ *        title: Create a new video
+ *        description: A video about fullstack web development
+ *        status: todo
+ *        priority: normal
+ *        dueDate: 2025-01-01T12:00:00Z
+* */
+
+/**
+ * @swagger 
+ * 
+ * components: 
+ *  schemas:
+ *    TaskDelete:
+ *      type: object
+ *      required: 
+ *        - _id
+ *      properties: 
+ *        _id:
+ *          type: string
+ *          description: MongoDB ObjectId of task
+ *          format: ObjectId
+
+ *      example:
+ *        _id: 68a34b78c808a55af4220da0
+* */
