@@ -3,6 +3,8 @@ const { StatusCodes } = require("http-status-codes");
 const errorLogger = require("../../helpers/errorLogger.helper.js");
 const getUserByEmail = require("../../users/providers/getUserByEmail.provider.js")
 const bcrypt = require("bcrypt");
+const generateTokenProvider = require("./generateTokenProvider.js");
+
 
 async function loginProvider (req, res) {
   const validatedData = matchedData(req);
@@ -20,8 +22,15 @@ async function loginProvider (req, res) {
       });
     }
 
+    const token = generateTokenProvider(user);
 
-    return res.status(StatusCodes.OK).json({login: true});
+
+    return res.status(StatusCodes.OK).json({
+      accessToken: token,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    });
   } catch(error) {
     errorLogger("Error while trying to login: ", req, error);
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({

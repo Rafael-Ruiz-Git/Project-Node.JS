@@ -5,7 +5,8 @@ const errorLogger = require("../../helpers/errorLogger.helper.js");
 
 async function createTaskProvider(req, res) {
   const validatedData = matchedData(req);
-  const task = new Task(validatedData);
+  const task = new Task({...validatedData, user: req.user.sub});
+
   try {
     // Insert the article in  MongoDB database
     await task.save();

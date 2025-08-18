@@ -1,11 +1,12 @@
 POST http://localhost:3001/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGEzNGI3OGM4MDhhNTVhZjQyMjBkYTAiLCJlbWFpbCI6ImFsZXhAcnVpei5jb20iLCJpYXQiOjE3NTU1NDM5MjcsImV4cCI6MTc1NTYzMDMyN30.mDoy1PLZYzuBzgois8d53dpIejlQSbOFpXhN_SENAYg
+
 
 {
   "title": "Title of the task with user 1",
   "dueDate" : "2025-01-01T12:00:00Z",
   "description": "a long list of description",
   "priority" : "normal",
-  "status": "todo"  ,
-  "user": "689e4081e757b2a643238215"
-}
+  "status": "todo"  
+  }
